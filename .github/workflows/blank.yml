@@ -17,11 +17,3 @@ steps:
 # Checkout the repository
 - name: Checkout Repository
 uses: actions/checkout@v2
-
-
-# Run ZAP Scan
-- name: ZAP Scan
-uses: zaproxy/action-baseline@v0.14.0
-with:
-target: 'https://www.medium.com/'
-token: ${{ secrets.GITHUB_TOKEN }}
