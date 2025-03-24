@@ -17,11 +17,13 @@ steps:
 # Checkout the repository
 - name: Checkout Repository
 uses: actions/checkout@v2
-# Set up Python (optional, if your application is Python-based)
-- name: Set up Python
-uses: actions/setup-python@v2
-with:
-python-version: '3.8'
+
+   # Set up Python (optional, if your application is Python-based)
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+              python-version: '3.8'
+
 # Run ZAP Scan
 - name: ZAP Scan
 uses: zaproxy/action-baseline@v0.14.0
