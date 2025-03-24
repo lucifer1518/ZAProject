@@ -1,31 +1,32 @@
 name: OWASP ZAP Scan
+
 on:
-pull_request:
-branches:
-- main # Trigger ZAP scan on PRs targeting the `main` branch
-push:
-branches:
-- main # Or trigger on push to the `main` branch
-workflow_dispatch: # Allow manual triggering of the workflow
+  pull_request:
+    branches:
+      - main # Trigger ZAP scan on PRs targeting the `main` branch
+  push:
+    branches:
+      - main # Trigger ZAP scan on push to the `main` branch
+  workflow_dispatch: # Allow manual triggering
+
 permissions:
-issues: write
+  issues: write
 
 jobs:
-zap_scan:
-runs-on: ubuntu-latest
-steps:
-# Checkout the repository
-- name: Checkout Repository
-uses: actions/checkout@v2
-# Set up Python (optional, if your application is Python-based)
-- name: Set up Python
-uses: actions/setup-python@v2
-with:
-python-version: '3.8'
-# Run ZAP Scan
-- name: ZAP Scan
-uses: zaproxy/action-baseline@v0.14.0
-with:
-target: 'https://www.medium.com/'
-env:
-token: ${{ secrets.GITHUB_TOKEN }}
+  zap_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.14.0
+        with:
+          target: 'https://www.medium.com/' # Replace with your real app URL
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
